@@ -29,6 +29,13 @@
           "options": {
             "tsConfig": "projects/axon/tsconfig.spec.json"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/axon/**/*.ts", "projects/axon/**/*.html"],
+            "eslintConfig": "projects/axon/eslint.config.js"
+          }
         }
       }
     },
@@ -95,6 +102,13 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/axon-demo/**/*.ts", "projects/axon-demo/**/*.html"],
+            "eslintConfig": "projects/axon-demo/eslint.config.js"
+          }
         }
       }
     }

@@ -5,7 +5,7 @@ enum MockState { Idle = 'Idle', Running = 'Running' };
 
 describe('Axon', () => {
   let axon: Axon<MockState, { count: number }>;
-  const graph: AxonGraph<MockState> = {
+  const graph: AxonGraph<MockState, { count: number }> = {
     [MockState.Idle]: [MockState.Running]
   };
 

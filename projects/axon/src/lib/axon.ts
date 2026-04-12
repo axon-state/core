@@ -1,45 +1,34 @@
-import { signal, computed, Signal, untracked } from '@angular/core';
+import { signal, computed, Signal, untracked, WritableSignal } from '@angular/core';
 
-/**
- * Defines the valid next states for any given state.
- * Supports simple state arrays or guarded transitions with context-aware logic.
- */
-export type AxonGraph<S extends string | number, T = any> = {
-  [K in S]?: Array<S | { to: S; guard: (context: T) => boolean }>;
-};
+export type AxonGraph<S extends string | number, T> = Partial<Record<S, (S | { to: S; guard: (context: T) => boolean })[]>>;
 
-/**
- * Axon: A Signal-native Finite State Machine for Angular 21+.
- * Engineered for multi-instance performance and absolute type safety.
- */
-export class Axon<S extends string | number, T = any> {
-  private readonly _state = signal<{ status: S; context: T }>({
-    status: this.initialState,
-    context: this.initialContext,
-  });
+export class Axon<S extends string | number, T> {
+  private readonly _state: WritableSignal<{ status: S; context: T }>;
+  private readonly _canGoCache = new Map<S, Signal<boolean>>();
 
-  private _canGoCache = new Map<S, Signal<boolean>>();
-
-  /** Reactive Signal representing the current state status */
   readonly state = computed(() => this._state().status);
-  
-  /** Reactive Signal representing the current data context */
   readonly context = computed(() => this._state().context);
 
-  /** * The 'Can' Proxy: Access reactive transition checks as properties.
-   * @example [disabled]="!axon.can.Processing()"
+  /**
+   * The 'Can' Proxy: Access reactive transition checks as properties.
+   * Typed as a Record of your states to provide full IDE autocompletion.
    */
-  readonly can = new Proxy({} as any, {
-    get: (_, nextState: string) => this.canGo(nextState as unknown as S)
+  readonly can: Record<S, Signal<boolean>> = new Proxy({} as Record<S, Signal<boolean>>, {
+    get: (_, nextState: string | symbol) => this.canGo(nextState as S)
   });
 
   constructor(
     private initialState: S,
     private initialContext: T,
     private graph: AxonGraph<S, T>
-  ) {}
+  ) {
+    // Initialize signal inside constructor so parameters are available
+    this._state = signal({
+      status: this.initialState,
+      context: this.initialContext,
+    });
+  }
 
-  /** Static factory for clean instantiation without 'new' */
   static create<S extends string | number, T>(
     initialState: S,
     context: T,
@@ -48,12 +37,11 @@ export class Axon<S extends string | number, T = any> {
     return new Axon<S, T>(initialState, context, graph);
   }
 
-  /**
-   * Returns a memoized Signal indicating if a transition is currently allowed.
-   */
   canGo(nextState: S): Signal<boolean> {
-    if (!this._canGoCache.has(nextState)) {
-      const canGoSignal = computed(() => {
+    let canGoSignal = this._canGoCache.get(nextState);
+    
+    if (!canGoSignal) {
+      canGoSignal = computed(() => {
         const { status, context } = this._state();
         const allowed = this.graph[status] ?? [];
         
@@ -67,15 +55,9 @@ export class Axon<S extends string | number, T = any> {
       
       this._canGoCache.set(nextState, canGoSignal);
     }
-    return this._canGoCache.get(nextState)!;
+    return canGoSignal;
   }
 
-  /**
-   * Triggers a state transition.
-   * @param nextState The target state
-   * @param updater Optional context update function
-   * @returns boolean - Success of the transition
-   */
   go(nextState: S, updater?: (current: T) => T): boolean {
     return untracked(() => {
       if (this.canGo(nextState)()) {
@@ -89,7 +71,6 @@ export class Axon<S extends string | number, T = any> {
     });
   }
 
-  /** Current state check (Non-reactive for logic blocks) */
   is(status: S): boolean {
     return this._state().status === status;
   }
