@@ -34,7 +34,7 @@ export class Axon<S extends string | number, T> {
     private readonly initialState: S,
     private readonly initialContext: T,
     private readonly graph: AxonGraph<S, T>,
-    private readonly historyLimit: number = 50
+    private readonly historyLimit = 50
   ) {
     const initial = { status: this.initialState, context: this.initialContext };
     this._state = signal(initial);
@@ -45,7 +45,7 @@ export class Axon<S extends string | number, T> {
     initialState: S,
     context: T,
     graph: AxonGraph<S, T>,
-    historyLimit: number = 50
+    historyLimit = 50
   ): Axon<S, T> {
     return new Axon<S, T>(initialState, context, graph, historyLimit);
   }

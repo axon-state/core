@@ -40,9 +40,11 @@
         <span>Total Amount:</span>
         <span>{{ order.context().total | currency }}</span>
       </div>
-      <div class="history-badge" *ngIf="order.historySize > 1">
-        Step {{ order.historySize }} of workflow
-      </div>
+      @if (order.historySize > 1) {
+        <div class="history-badge">
+          Step {{ order.historySize }} of workflow
+        </div>
+      }
     </div>
 
     <div class="card-actions">
