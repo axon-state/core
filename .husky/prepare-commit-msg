@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# If the commit message is empty (standard git commit), trigger the wizard
+if [ -z "$2" ]; then
+  exec < /dev/tty
+  npx cz --hook || true
+fi
