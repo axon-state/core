@@ -1,6 +1,8 @@
 {
   "name": "@ngx-axon/core",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "author": "Marco Buschini",
+  "description": "The Neural Pathway for Angular State Management using Signals.",
   "peerDependencies": {
     "@angular/common": "^21.2.0",
     "@angular/core": "^21.2.0"
