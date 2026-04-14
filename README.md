@@ -2,9 +2,11 @@
 [![CI Status](https://github.com/axon-state/core/actions/workflows/ci.yml/badge.svg)](https://github.com/axon-state/core/actions/workflows/ci.yml)
 [![Release Status](https://github.com/axon-state/core/actions/workflows/release.yml/badge.svg)](https://github.com/axon-state/core/actions/workflows/release.yml)
 [![codecov](https://codecov.io/gh/axon-state/core/branch/main/graph/badge.svg)](https://codecov.io/gh/axon-state/core)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-orange.svg?style=flat-square)](https://github.com/axon-state/core/issues)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Powered by Signals](https://img.shields.io/badge/powered_by-signals-red?logo=angular&logoColor=white)](https://angular.io/guide/signals)
+[![Angular Version](https://img.shields.io/badge/angular-%3E%3D21.0.0-dd0031?style=flat-square&logo=angular)](https://angular.io/)
 
 > **The Neural Pathway for Angular State Management using Signals.**
 
