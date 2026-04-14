@@ -41,3 +41,10 @@ jobs:
       - name: Run Tests
         run: npm run test axon -- --watch=false --coverage
         # Since you're using Vitest, --watch=false is required for CI.
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          # token: ${{ secrets.CODECOV_TOKEN }} # Only needed if your repo is private, but recommended
+          directory: ./coverage/
+          fail_ci_if_error: true
