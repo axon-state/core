@@ -11,6 +11,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: read
+      id-token: write
     # Ensure this only runs if tests passed (optional, but recommended)
     steps:
       - name: Checkout Code
@@ -19,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: 'npm'
 
       - name: Install Dependencies
@@ -51,5 +52,3 @@ jobs:
           cd dist/axon # Ensure this is the folder containing the package.json to be published
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
           npm publish --access public
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
