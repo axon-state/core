@@ -43,7 +43,7 @@ jobs:
         # Since you're using Vitest, --watch=false is required for CI.
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # Only needed if your repo is private, but recommended
           directory: ./coverage/
