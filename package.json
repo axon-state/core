@@ -5,10 +5,10 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve axon-demo",
     "build:lib": "ng build axon",
     "build:demo": "ng build axon-demo",
+    "watch:lib": "ng build axon --watch",
     "test": "ng test --coverage",
     "lint": "ng lint",
     "commit": "cz",
