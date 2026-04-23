@@ -1,6 +1,5 @@
 # 🧠 Axon
 [![CI Status](https://github.com/ngx-axon/core/actions/workflows/ci.yml/badge.svg)](https://github.com/ngx-axon/core/actions/workflows/ci.yml)
-[![Release Status](https://github.com/ngx-axon/core/actions/workflows/release.yml/badge.svg)](https://github.com/ngx-axon/core/actions/workflows/release.yml)
 [![codecov](https://codecov.io/gh/ngx-axon/core/branch/main/graph/badge.svg)](https://codecov.io/gh/ngx-axon/core)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-orange.svg?style=flat-square)](https://github.com/ngx-axon/core/issues)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
