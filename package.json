@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve axon-demo",
+    "start": "npm run build:lib && ng serve axon-demo",
     "build:lib": "ng build axon",
     "build:demo": "ng build axon-demo",
     "watch:lib": "ng build axon --watch",
